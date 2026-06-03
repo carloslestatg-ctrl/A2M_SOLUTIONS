@@ -1,0 +1,448 @@
+/* ==========================================================================
+   VARIABLES Y CONFIGURACIÓN BASE
+   ========================================================================== */
+:root {
+    --primary: #0a2540;        /* Azul profundo corporativo */
+    --accent: #00d4ff;         /* Cyan tecnológico vibrante */
+    --accent-hover: #00b2d6;   
+    --text-dark: #1c2a38;      
+    --text-light: #f4f6f9;     
+    --bg-light: #f8fafc;       
+    --white: #ffffff;
+    --card-shadow: 0 15px 35px rgba(10, 37, 64, 0.1);
+    --transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* Transición más larga para el giro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   NAVBAR (Efecto de Cristal)
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1rem 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.nav-menu a:hover {
+    color: var(--accent);
+}
+
+.nav-menu .btn-nav {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+}
+
+.nav-menu .btn-nav:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero {
+    position: relative;
+    padding: 10rem 0 7rem 0;
+    background: radial-gradient(circle at 80% 20%, #e0f7fc 0%, var(--bg-light) 50%);
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.badge {
+    background-color: rgba(0, 212, 255, 0.15);
+    color: #008fae;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #5a6e85;
+    margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--primary);
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   SECCIÓN DE CATEGORÍAS (Efecto 3D Flip con CSS Puro)
+   ========================================================================== */
+.categories {
+    padding: 7rem 0;
+    background-color: var(--white);
+}
+
+.section-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.grid-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* Contenedor principal de la tarjeta con perspectiva 3D */
+.flip-card {
+    background-color: transparent;
+    height: 350px;
+    perspective: 1000px; /* Determina el efecto de profundidad */
+}
+
+/* Sub-contenedor que rota */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: var(--transition);
+    transform-style: preserve-3d; /* Permite que los hijos hereden el entorno 3D */
+}
+
+/* Activación de la rotación al hacer Hover */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Propiedades comunes de ambas caras */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Oculta la cara posterior al girar */
+    backface-visibility: hidden;
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARA FRONTAL (Diseño Original Elegante) */
+.card-front {
+    background-color: var(--bg-light);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.card-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    background-color: var(--white);
+    border-radius: 12px;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.card-front h3 {
+    font-size: 1.35rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.card-front p {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* CARA POSTERIOR (Efecto Invertido Premium) */
+.card-back {
+    background: linear-gradient(135deg, var(--primary) 0%, #061524 100%);
+    color: var(--white);
+    transform: rotateY(180deg); /* Pre-rotada para que aparezca al dar la vuelta */
+    box-shadow: var(--card-shadow);
+}
+
+.card-back h3 {
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.card-back p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+/* Botón de la cara de atrás */
+.btn-catalog {
+    background-color: #25d366; /* Verde WhatsApp */
+    color: var(--white);
+    font-size: 0.95rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-catalog:hover {
+    background-color: #20ba5a;
+    transform: translateY(-2px);
+}
+
+/* Cambios estéticos durante el hover general */
+.flip-card:hover .card-icon {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+/* ==========================================================================
+   FOOTER (Elegante con frase inspiradora)
+   ========================================================================== */
+footer {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 5rem 0 2rem 0;
+    border-top: 4px solid var(--accent);
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.footer-brand h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.footer-brand p {
+    color: #94a3b8;
+    max-width: 300px;
+}
+
+.footer-quote {
+    border-left: 3px solid var(--accent);
+    padding-left: 2rem;
+}
+
+.footer-quote blockquote {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #cbd5e1;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DE WHATSAPP
+   ========================================================================== */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    background-color: #20ba5a;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Adaptabilidad Móvil)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+    
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+    
+    .hero {
+        padding: 8rem 0 4rem 0;
+        text-align: center;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .flip-card {
+        height: 320px; /* Un poco más compactas en móvil */
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-quote {
+        border-left: none;
+        border-top: 2px solid var(--accent);
+        padding-left: 0;
+        padding-top: 1.5rem;
+    }
+}
